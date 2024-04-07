@@ -20,13 +20,23 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const issue_number = context.payload.pull_request.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const message = "Thank you for your contribution! We will review it as soon as possible. 😊";
+            const message = "Writing from Actions";
             github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number,
+              owner: "SuttGHA",
+              repo: "my-gha-1",
+              issue_number: "6",
               body: message
             });
+        # with:
+        #   github-token: ${{secrets.GITHUB_TOKEN}}
+        #   script: |
+        #     const issue_number = context.payload.pull_request.number;
+        #     const owner = context.repo.owner;
+        #     const repo = context.repo.repo;
+        #     const message = "Thank you for your contribution! We will review it as soon as possible. 😊";
+        #     github.rest.issues.createComment({
+        #       owner,
+        #       repo,
+        #       issue_number,
+        #       body: message
+        #     });
