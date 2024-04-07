@@ -19,7 +19,7 @@ jobs:
             const message = "Writing from Actions";
             github.rest.issues.createComment({
               "SuttGHA",
-              my-gha-1,
+              "my-gha-1",
               6,
               body: message
             });
