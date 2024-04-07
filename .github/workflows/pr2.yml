@@ -16,7 +16,8 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      -name: Print relevant vars
+      
+      - name: Print relevant vars
         uses: actions/github-script@v7
         with:
           script: |
