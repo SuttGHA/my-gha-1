@@ -17,26 +17,26 @@ jobs:
         with:
           fetch-depth: 0  # Ensure all history is checked out
   
-      - name: List all modified files
-        id: files
-        run: |
-          echo "Files changed:"
-          git fetch origin ${{github.event.pull_request.base.sha}}:${{github.event.pull_request.base.ref}}
-          git diff --name-only ${{github.event.pull_request.base.sha}} ${{github.sha}} | grep '\.md$'
-          FILES=$(git diff --name-only ${{github.event.pull_request.base.sha}} ${{github.sha}} | grep '\.md$')
-          echo "::set-output name=all_md_files::$FILES"
+      # - name: List all modified files
+      #   id: files
+      #   run: |
+      #     echo "Files changed:"
+      #     git fetch origin ${{github.event.pull_request.base.sha}}:${{github.event.pull_request.base.ref}}
+      #     git diff --name-only ${{github.event.pull_request.base.sha}} ${{github.sha}} | grep '\.md$'
+      #     FILES=$(git diff --name-only ${{github.event.pull_request.base.sha}} ${{github.sha}} | grep '\.md$')
+      #     echo "::set-output name=all_md_files::$FILES"
 
-      - name: Read and echo the content of a Markdown file
-        run: |
-          FILE_TO_READ=$(echo ${{ steps.files.outputs.all_md_files }} | cut -d ' ' -f 1)
-          if [ ! -z "$FILE_TO_READ" ]; then
-            CONTENT=$(cat $FILE_TO_READ)
-            echo "Content of $FILE_TO_READ:"
-            echo "$CONTENT"
-            echo "::set-env name=MD_CONTENT::$CONTENT"
-          else
-            echo "No Markdown files were changed."
-          fi
+      # - name: Read and echo the content of a Markdown file
+      #   run: |
+      #     FILE_TO_READ=$(echo ${{ steps.files.outputs.all_md_files }} | cut -d ' ' -f 1)
+      #     if [ ! -z "$FILE_TO_READ" ]; then
+      #       CONTENT=$(cat $FILE_TO_READ)
+      #       echo "Content of $FILE_TO_READ:"
+      #       echo "$CONTENT"
+      #       echo "::set-env name=MD_CONTENT::$CONTENT"
+      #     else
+      #       echo "No Markdown files were changed."
+      #     fi
 
 
       # - name: Set context as env var
