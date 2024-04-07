@@ -1,4 +1,4 @@
-name: Get Context on PR
+name: PR3
 
 on:
   pull_request_target:
@@ -8,7 +8,7 @@ on:
 #   issues: write
 
 jobs:
-  list-changed-files:
+  gh-obj-list-changed-files:
     runs-on: ubuntu-latest
     steps:
       - name: List changed files
