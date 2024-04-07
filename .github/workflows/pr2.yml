@@ -1,0 +1,49 @@
+name: Get Context on PR
+
+on:
+  pull_request_target:
+    types: [opened]  # This workflow triggers when a pull request is opened.
+
+permissions:
+  issues: write
+
+jobs:
+  new_welcome_message:
+    runs-on: ubuntu-latest  # Specifies the runner.
+
+    steps:
+      - name: Set context as env var
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      
+      - name: Print context using github-script
+        uses: actions/github-script@v7
+        with:
+          script: console.log(JSON.stringify(context, null, 2))
+          
+      - name: Leave a comment on the PR
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const message = "Writing from Actions PR2";
+            github.rest.issues.createComment({
+              owner: "SuttGHA",
+              repo: "my-gha-1",
+              issue_number: "6",
+              body: message
+            });
+        # with:
+        #   github-token: ${{secrets.GITHUB_TOKEN}}
+        #   script: |
+        #     const issue_number = context.payload.pull_request.number;
+        #     const owner = context.repo.owner;
+        #     const repo = context.repo.repo;
+        #     const message = "Thank you for your contribution! We will review it as soon as possible. 😊";
+        #     github.rest.issues.createComment({
+        #       owner,
+        #       repo,
+        #       issue_number,
+        #       body: message
+        #     });
