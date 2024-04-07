@@ -4,11 +4,11 @@ on:
   pull_request_target:
     types: [opened]  # This workflow triggers when a pull request is opened.
 
-# permissions:
-#   issues: write
+permissions:
+  issues: write
 
 jobs:
-  gh-obj-list-changed-files:
+  pr_3_job:
     runs-on: ubuntu-latest
     steps:
       - name: List changed files
