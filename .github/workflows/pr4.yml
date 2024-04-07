@@ -1,0 +1,16 @@
+name: PR4
+
+on:
+  pull_request_target:
+    types: [opened]  # This workflow triggers when a pull request is opened.
+
+permissions:
+  issues: write
+
+jobs:
+  new_welcome_message:
+    runs-on: ubuntu-latest  # Specifies the runner.
+
+    steps:
+      - name: hello_world
+        run: echo "see the pr4 does work"
