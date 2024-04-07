@@ -1,0 +1,32 @@
+name: Get Context on PR
+
+on:
+  pull_request_target:
+    types: [opened]  # This workflow triggers when a pull request is opened.
+
+# permissions:
+#   issues: write
+
+jobs:
+  list-changed-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List changed files
+        uses: actions/github-script@v6
+        id: files
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const fileNames = pullRequest.files.filter(file => file.filename.endsWith('.md')).map(file => file.filename);
+            return fileNames;
+
+      - name: Log .md files
+        run: echo "Markdown files changed: ${{ steps.files.outputs.result }}"
+
+
