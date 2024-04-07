@@ -29,6 +29,4 @@ jobs:
       - name: Log .md files
         env:
             EXAMPLE_ONE: ${{ steps.files.outputs.result }}
-        run: echo "Markdown files changed: $EXAMPLE_ONE"
-
-
+        run: echo "$EXAMPLE_ONE"
