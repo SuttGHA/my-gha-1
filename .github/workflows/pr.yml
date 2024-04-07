@@ -1,16 +1,16 @@
-name: PR Welcome Message
+name: PR Welcome Message 2
 
 on:
   pull_request_target:
     types: [opened]  # This workflow triggers when a pull request is opened.
 
 jobs:
-  welcome_message:
+  new_welcome_message:
     runs-on: ubuntu-latest  # Specifies the runner.
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # - name: Checkout code
+      #   uses: actions/checkout@v3
 
       - name: Leave a comment on the PR
         uses: actions/github-script@v6
