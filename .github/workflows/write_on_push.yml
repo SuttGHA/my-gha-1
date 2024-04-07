@@ -16,8 +16,8 @@ jobs:
           script: |
             const message = "Writing from Actions";
             github.rest.issues.createComment({
-              "SuttGHA",
-              "my-gha-1",
-              "6",
+              owner: "SuttGHA",
+              repo: "my-gha-1",
+              issue_number: "6",
               body: message
             });
