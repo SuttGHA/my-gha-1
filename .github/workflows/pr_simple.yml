@@ -32,6 +32,17 @@ jobs:
         with:
           fetch-depth: 0  # Ensure all history is checked out
   
+  pr_simple_echo_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List changed files
+        uses: actions/github-script@v6
+        id: files
+        with:
+          script: |
+            console.log(JSON.stringify(context.payload.pull_request, null, 2))
+
+
   pr_simple_pr_files:
     runs-on: ubuntu-latest
     steps:
