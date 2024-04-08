@@ -47,7 +47,9 @@ jobs:
               repo: "my-gha-1",
               pull_number: pr_number
             });
-            console.log('done:')
+            console.log('done:');
+            cosnole.log(pr_number);
+            console.log(pullRequest);
             console.log(pullRequest.files);
             return pullRequest.files;
 
