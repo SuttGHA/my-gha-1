@@ -48,7 +48,7 @@ jobs:
               pull_number: pr_number
             });
 
-            return fileNames;
+            return pullRequest.files;
 
       - name: Log .md files
         env:
