@@ -38,8 +38,14 @@ jobs:
 
       - name: Setup LIME
         run: |
-          pip install git+https://github.com/sutt/lime.git
+          pip install wheel
+          pip install git+https://github.com/sutt/lime.git@setup
 
       - name: Run LIME check
         run: |
           lime check
+
+      - name: Run LIME on lime dir
+        run:
+          cd lime-sheets
+          lime eval . -v
