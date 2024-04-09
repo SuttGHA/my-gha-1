@@ -39,7 +39,7 @@ jobs:
   basic_lime:
     runs-on: ubuntu-latest
     steps:
-    
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -60,6 +60,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install wheel
           pip install git+https://github.com/sutt/lime.git@setup
+
+      - name: Set OPENAI_API_KEY
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       - name: Run LIME check
         run: |
