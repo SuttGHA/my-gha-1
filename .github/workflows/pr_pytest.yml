@@ -61,15 +61,15 @@ jobs:
           pip install wheel
           pip install git+https://github.com/sutt/lime.git@setup
 
-      - name: Set OPENAI_API_KEY
+      - name: Run LIME check
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      - name: Run LIME check
         run: |
           lime check
 
       - name: Run LIME on lime dir
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd lime-sheets
           lime eval . -v
