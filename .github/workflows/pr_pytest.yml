@@ -35,3 +35,11 @@ jobs:
       - name: Run tests
         run: |
           pytest -vv tests
+
+      - name: Setup LIME
+        run: |
+          pip install git+https://github.com/sutt/lime.git
+
+      - name: Run LIME check
+        run: |
+          lime check
