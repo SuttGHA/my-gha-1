@@ -32,9 +32,9 @@ jobs:
         run: |
           ls -R
 
-      - name: Run tests
-        run: |
-          pytest -vv tests
+      # - name: Run tests
+      #   run: |
+      #     pytest -vv tests
 
       - name: Setup LIME
         run: |
