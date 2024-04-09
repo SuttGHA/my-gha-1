@@ -6,7 +6,7 @@ on:
 
 jobs:
   basic_pytest:
-    runs-on: ubuntu-latest  # Specifies the runner.
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -32,10 +32,13 @@ jobs:
         run: |
           ls -R
 
-      # - name: Run tests
-      #   run: |
-      #     pytest -vv tests
-
+      - name: Run tests
+        run: |
+          pytest -vv tests
+  
+  basic_lime:
+    runs-on: ubuntu-latest
+    steps:
       - name: Setup LIME
         run: |
           pip install wheel
@@ -46,6 +49,6 @@ jobs:
           lime check
 
       - name: Run LIME on lime dir
-        run:
+        run: |
           cd lime-sheets
           lime eval . -v
