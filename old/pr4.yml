@@ -24,30 +24,34 @@ jobs:
               body: message
             });
 
-  pr_simple_get_code:
-    runs-on: ubuntu-latest  # Specifies the runner.
+  # this only gets base repos code, not updated code from pr
+  pr_simple_get_code_base:
+    runs-on: ubuntu-latest  
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensure all history is checked out
+          fetch-depth: 0
 
       - name: list files
         run: |
           ls -R
 
-  pr_simple_get_code_2:
+  # This ref setting allow us to get the code
+  # the pr submitter intended to commit
+  pr_simple_get_code_pr:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensure all history is checked out
+          fetch-depth: 0  
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: list files
         run: |
           ls -R
+  
   
   pr_simple_echo_1:
     runs-on: ubuntu-latest
@@ -65,6 +69,7 @@ jobs:
 
 
   pr_simple_pr_files:
+    # This doesnt work
     runs-on: ubuntu-latest
     steps:
       
@@ -95,6 +100,8 @@ jobs:
         env:
             EXAMPLE_ONE: ${{ steps.files.outputs.result }}
         run: echo "$EXAMPLE_ONE"
+
+  # This only gets a printout of the diff
   pr_simple_diff_url:
     runs-on: ubuntu-latest
     steps:
@@ -105,6 +112,7 @@ jobs:
             const result = await github.request(diff_url)
             console.log(result)
 
+  # These work and are good examples
   pr_simple_changed_files:
     runs-on: ubuntu-latest  # windows-latest || macos-latest
     name: Test changed-files
